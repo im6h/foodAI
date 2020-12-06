@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  database:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=apikit_db
+      - MYSQL_USER=apikit_user
+      - MYSQL_PASSWORD=apikit_password
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - ./data/db:/usr/mysql
+    ports:
+      - 3306:3306
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #     - PMA_HOST=database
+  #     - PMA_PORT=3306
+  #     - PMA_USER=apikit_user
+  #     - PMA_PASSWORD=apikit_password
+  #   ports:
+  #     - 6380:80
+
+  redis:
+    image: redis
+    ports:
+      - 3309:6379
+  # rabbitmq:
+  #   image: 'rabbitmq:3.6-management-alpine'
+  #   ports:
+  #     - '4369:4369'
+  #     - '5672:5672'
+  #     - '25672:25672'
+  #     - '15672:15672'
+  #   volumes:
+  #     - './data/rabbitmq:/bitnami'

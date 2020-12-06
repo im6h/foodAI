@@ -1,0 +1,10 @@
+rice
+hambuger
+pizza
+sandwiches
+ramen
+spagetti
+friedfish
+friedchicken
+hotdog
+soup

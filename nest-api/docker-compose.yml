@@ -1,0 +1,76 @@
+version: '3.1'
+
+services:
+  database:
+    image: mariadb
+    environment:
+      - MYSQL_DATABASE=apikit_db
+      - MYSQL_USER=apikit_user
+      - MYSQL_PASSWORD=apikit_password
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - ./data/db:/var/lib/mysql
+    ports:
+      - 6339:3306
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - PMA_USER=apikit_user
+      - PMA_PASSWORD=apikit_password
+    ports:
+      - 6381:80
+
+  redis:
+    image: redis
+    ports:
+      - 7479:6379
+  app:
+    build: .
+    image: agiletech/webapi:latest
+    # expose:
+    #   - 2000
+    environment:
+      # NODE_ENV=dev
+      - PORT=3001
+      - DATABASE_URL=mysql://apikit_user:apikit_password@database:3306/apikit_db
+      - DATABASE_NAME=apikit_db
+      - REDIS_URL=redis://redis:6379
+      - SENTRY_DNS=https://ad2499a25a734b399134655f55de5d66@sentry.io/2664946
+      - MAIL_DRIVER=smtp
+      - MAIL_HOST=smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USERNAME=null
+      - MAIL_PASSWORD=null
+      - MAIL_ENCRYPTION=null
+      - MAIL_FROM_ADDRESS=null
+      - MAIL_FROM_NAME="Fina"
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_SES_REGION=us-east-1
+      - AWS_BUCKET=
+      - FACEBOOK_APP_ID=409215309558000
+      - FACEBOOK_APP_SECRET=9ed8b4b91a265133df5cd344feb32cf4
+      - GOOGLE_CLIENT_ID=457188375271-2ks9p49ir3q78bq2fb9vlqtoe9d27dd0.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=RvtgmSiM4u6zJo2iiJyWwfkd
+      - ZALO_APP_ID=3998876986020697708
+      - ZALO_APP_SECRET=vOFUPHZMwyOW5t4TRRJw
+      - SWAGGER_URL=http://localhost:3001
+      - CAPTCHA_SECRET=6Leq7-AUAAAAAMz1qLSCibA1QSAVrTrsD5AME7Fm
+      - GCS_BUCKET=image-fina
+      - GCLOUD_PROJECT=high-gecko-270705
+      - GOOGLE_APPLICATION_CREDENTIALS=high-gecko-270705-442b77480b9b.json
+      - PROTOCOL=http
+      - FRONTEND_DOMAIN=localhost:3001
+      - FORGOT_PASSWORD_PATH=dat-lai-mat-khau
+      - ENCRYPTION_KEY=xGIo5g0rwsAle6aCsZKMbUYEginlaZqx
+      - TIME_OUT_TOKEN_MINUSTES=10
+    ports:
+      - 4081:3001
+    depends_on:
+      - database
+      - redis
