@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 // import { LoanEntity } from '../../../modules/loans/entities/loan.entity';
-@Entity('LocationCountry')
+// @Entity('LocationCountry')
 export class CountryEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

@@ -18,8 +18,21 @@ import { ProvinceController } from './controllers/province.controller';
 import { LocationAppController } from './controllers/location.app.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CountryEntity, StateEntity, CityEntity, ProvinceEntity, WardEntity])],
-  controllers: [CitiesController, CountriesController, StatesController, WardsController, ProvinceController, LocationAppController],
-  providers: [CitiesService, CountriesService, StatesService, WardsService, ProvinceService],
+  // imports: [TypeOrmModule.forFeature([CountryEntity, StateEntity, CityEntity, ProvinceEntity, WardEntity])],
+  controllers: [
+    CitiesController,
+    CountriesController,
+    StatesController,
+    WardsController,
+    ProvinceController,
+    LocationAppController,
+  ],
+  providers: [
+    CitiesService,
+    CountriesService,
+    StatesService,
+    WardsService,
+    ProvinceService,
+  ],
 })
-export class LocationsModule { }
+export class LocationsModule {}

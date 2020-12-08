@@ -39,8 +39,9 @@ def handleImage(img_array):
     with open("/home/im6h/Desktop/code/foodAI/flask-api/utils/classes.txt", "r") as f:
         classes = [line.strip() for line in f.readlines()]
 
+    # use file weight to detect image, file weight is depend your train.
     net = cv2.dnn.readNet(
-        "/home/im6h/Desktop/code/foodAI/flask-api/utils/yolov3_custom_2000.weights",
+        "/home/im6h/Desktop/code/foodAI/flask-api/utils/yolov3_custom_6000.weights",
         "/home/im6h/Desktop/code/foodAI/flask-api/utils/yolov3.cfg",
     )
     blob = cv2.dnn.blobFromImage(

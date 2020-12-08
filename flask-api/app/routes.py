@@ -10,13 +10,6 @@ def index():
     return 'Hello World'
 
 
-@flask_app.route('/products', methods=['GET'])
-def get_products():
-    all_products = Product.query.all()
-    result = products_schema.dump(all_products)
-    return jsonify(result)
-
-
 @flask_app.route('/handler/', methods=['POST'])
 def about():
     if request.method == 'POST':

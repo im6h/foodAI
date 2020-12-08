@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-@Entity('LocationWard')
+// @Entity('LocationWard')
 export class WardEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

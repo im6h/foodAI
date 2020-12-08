@@ -1,6 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
 
-@Entity('LocationState')
+// @Entity('LocationState')
 export class StateEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

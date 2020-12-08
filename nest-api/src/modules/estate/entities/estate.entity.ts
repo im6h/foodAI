@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserEntity } from '../../users/entities/user.entity';
 
-@Entity('Estate')
+// @Entity('Estate')
 export class EstateEntity {
   @PrimaryGeneratedColumn()
   id?: number;
