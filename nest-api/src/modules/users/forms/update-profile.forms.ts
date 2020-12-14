@@ -10,9 +10,18 @@ export class UpdateProfileForm {
   @ApiProperty()
   email?: string;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   age?: number;
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   timeEat?: string;
+
+  @ApiProperty({ required: false })
+  width?: string;
+
+  @ApiProperty({ required: false })
+  height?: string;
+
+  @ApiProperty({ required: false })
+  dateOfBirth?: Date;
 }

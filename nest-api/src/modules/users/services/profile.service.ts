@@ -30,7 +30,15 @@ export class ProfileService {
   async fetchCurrent(identity: UserIdentity) {
     const userBasic = await this.basicRepository.findOne({
       where: { id: identity.sub },
-      select: ['email', 'username', 'age', 'timeEat'],
+      select: [
+        'email',
+        'username',
+        'age',
+        'timeEat',
+        'dateOfBirth',
+        'width',
+        'height',
+      ],
     });
 
     if (!userBasic) {
@@ -50,7 +58,15 @@ export class ProfileService {
       where: {
         id: user.sub,
       },
-      select: ['email', 'username', 'age', 'timeEat'],
+      select: [
+        'email',
+        'username',
+        'age',
+        'timeEat',
+        'dateOfBirth',
+        'width',
+        'height',
+      ],
     });
     return userUpdate;
   }
