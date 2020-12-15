@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import xlrd
 import urllib
+import os
 
 
 def get_output_layers(net):
@@ -17,16 +18,17 @@ def draw_prediction(class_id, classes, results):
     results.append(label)
 
 
-def handleImage(img_array):
+def handleImage(img_array, current, target, time):
     results = []
-    loc = "~/Desktop/code/foodAI/flask-api/utils/food.xlsx"
+    home_direct = os.getcwd()
+    loc = '{0}/utils/food.xlsx'.format(home_direct)
     wb = xlrd.open_workbook(loc)
     sheet = wb.sheet_by_index(0)
     dictionary = {"default": 0}
     data = {}
-    curw = 50
-    tarw = 54
-    days = 30
+    curw = current
+    tarw = target
+    days = time
     image = cv2.imdecode(img_array, -1)
     Width = image.shape[1]
     Height = image.shape[0]
@@ -36,13 +38,13 @@ def handleImage(img_array):
     calt = calt / days
     classes = None
 
-    with open("/home/im6h/Desktop/code/foodAI/flask-api/utils/classes.txt", "r") as f:
+    with open('{0}/utils/classes.txt'.format(home_direct), "r") as f:
         classes = [line.strip() for line in f.readlines()]
 
     # use file weight to detect image, file weight is depend your train.
     net = cv2.dnn.readNet(
-        "/home/im6h/Desktop/code/foodAI/flask-api/utils/yolov3_custom_10000.weights",
-        "/home/im6h/Desktop/code/foodAI/flask-api/utils/yolov3.cfg",
+        "{0}/utils/yolov3_custom_12000.weights".format(home_direct),
+        "{0}/utils/yolov3.cfg".format(home_direct),
     )
     blob = cv2.dnn.blobFromImage(
         image, scale, (416, 416), (0, 0, 0), True, crop=False)
@@ -92,8 +94,8 @@ def handleImage(img_array):
     return response
 
 
-def handle(url):
+def handle(url, current, target, time):
     url_handle = urllib.request.urlopen(url)
     img_array = np.array(bytearray(url_handle.read()), dtype=np.uint8)
-    data = handleImage(img_array)
+    data = handleImage(img_array, current, target, time)
     return jsonify({"data": data})

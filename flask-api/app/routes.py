@@ -14,5 +14,5 @@ def index():
 def about():
     if request.method == 'POST':
         req = request.get_json()
-    response = handle(req["url"])
+    response = handle(req["url"], req["current"], req["target"], req["time"])
     return response

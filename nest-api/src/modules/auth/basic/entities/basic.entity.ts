@@ -37,5 +37,14 @@ export class UserBasicEntity {
   age?: number = 0;
 
   @Column()
-  timeEat: string = '';
+  timeEat?: string = '';
+
+  @Column()
+  dateOfBirth?: Date;
+
+  @Column()
+  width?: string;
+
+  @Column()
+  height?: string;
 }
