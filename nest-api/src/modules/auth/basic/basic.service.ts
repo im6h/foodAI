@@ -27,7 +27,7 @@ import { ErrorCode } from '@/common/constants';
 import { Config } from '@/config';
 import { makeRandomNumber } from '@/utils/string';
 import { activeMailHtml } from '@/utils/activeMailHtml';
-import { validateUsername } from '@/utils/validate';
+import {validateEmail, validateUsername} from '@/utils/validate';
 
 @Injectable()
 export class BasicService {
@@ -61,6 +61,15 @@ export class BasicService {
 
     if (userByUsername) {
       return userByUsername;
+    } else {
+      const userByEmail = await this.basicRepository.findOne({
+        where: {
+          email: credential,
+        },
+      });
+      if (userByEmail) {
+        return userByEmail;
+      }
     }
     return null;
   }
@@ -91,14 +100,14 @@ export class BasicService {
   }
 
   async authenticate(payload: BasicForm): Promise<TokenResponse> {
-    if (!validateUsername(payload.username)) {
+    if (!validateUsername(payload.uid) && !validateEmail(payload.uid)) {
       throw new BadRequestException({
         payload: {
           message: ErrorCode.USERNAME_INVALID,
         },
       });
     }
-    const user = await this.findIdentity(payload.username);
+    const user = await this.findIdentity(payload.uid);
     if (!user) {
       throw new BadRequestException({
         payload: {
