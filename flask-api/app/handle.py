@@ -43,7 +43,7 @@ def handleImage(img_array, current, target, time):
 
     # use file weight to detect image, file weight is depend your train.
     net = cv2.dnn.readNet(
-        "{0}/utils/yolov3_custom_12000.weights".format(home_direct),
+        "{0}/utils/yolov3_custom_final.weights".format(home_direct),
         "{0}/utils/yolov3.cfg".format(home_direct),
     )
     blob = cv2.dnn.blobFromImage(
@@ -97,5 +97,8 @@ def handleImage(img_array, current, target, time):
 def handle(url, current, target, time):
     url_handle = urllib.request.urlopen(url)
     img_array = np.array(bytearray(url_handle.read()), dtype=np.uint8)
-    data = handleImage(img_array, current, target, time)
-    return jsonify({"data": data})
+    try:
+        data = handleImage(img_array, current, target, time)
+        return jsonify({"data": data})
+    except:
+        return jsonify({"error": 'error when detect'})
