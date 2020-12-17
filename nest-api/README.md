@@ -6,7 +6,7 @@
 [travis-url]: https://travis-ci.org/nestjs/nest
 [linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
 [linux-url]: https://travis-ci.org/nestjs/nest
-  
+
   <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
@@ -24,35 +24,26 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description 
+## Description
+
 Đây là bản hướng dẫn chạy dự án
+
 ## Setup
-Clone dự án về . 
+
+Clone dự án về .
+
 - Cài docker vào máy.
 - Tạo thư mục data/db
 - Map thư mục data/db vào docker file sharing
-- Ở root chạy lệnh 
+- Ở root chạy lệnh
+
 ```
 $ docker-compose -f ./docker-compose-local.yml up -d
 ```
+
 - Coppy file .env.example sang file .env thay các thông số tương ứng vào sau đó chạy lệnh ( Sau này các config bằng .env đều phải put vào .env.example)
+
 ```
 $ yarn *Cài các pack*
 $ yarn start:dev *Để chạy dev ở máy local*
-```
-## Tạo database seeding (Dữ liệu mẫu)
-
-- Tài liệu đọc tại [đây](https://github.com/w3tecch/typeorm-seeding/blob/master/README.md)
-
-## Notes
-
-- Trước khi push code lên nhớ chạy `yarn lint` để kiểm tra convention code. Khi có lỗi đâu thì nhớ sửa và chạy lại.
-- Tài liệu git tại [đây](rules/git.md)
-
-## Chạy prod
-
-```
-$ docker-compose up -d
-$ docker-compose build
-$ docker-compose up -d
 ```

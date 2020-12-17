@@ -33,18 +33,21 @@ export class UserBasicEntity {
     }
   }
 
-  @Column()
+  @Column({ nullable: true })
+  avatar?: string;
+
+  @Column({ nullable: true })
   age?: number = 0;
 
-  @Column()
+  @Column({ nullable: true })
   timeEat?: string = '';
 
-  @Column()
+  @Column({ nullable: true })
   dateOfBirth?: Date;
 
-  @Column()
+  @Column({ nullable: true })
   width?: string;
 
-  @Column()
+  @Column({ nullable: true })
   height?: string;
 }
