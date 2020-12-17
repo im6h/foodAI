@@ -3,7 +3,7 @@
 ```
 1. Install python and check version python (recommend python version 3.7)
 2. Run pip install -r requirements.txt to install package depend
-3. Clone weights file to utils folder
+3. Clone weights file to utils folder ‘wget "https://download1323.mediafire.com/x6g10mr8ktcg/t3o55gees6aqeg2/yolov3_custom_final.weights"’
 4. Run python server.py
 5. Open Postman and create a post request to endpoint http://localhost:3000/handler/
 6. Try body request:
