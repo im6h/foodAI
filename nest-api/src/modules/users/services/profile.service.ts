@@ -1,13 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as fs from 'fs';
-import * as uuid from 'uuid';
-
 import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { UserIdentity } from '../../auth/auth.decorator';
 import { UpdateProfileForm } from '../forms/update-profile.forms';
-import { RolesService } from '../../roles/services/roles.service';
 import { UserBasicEntity } from '@/modules/auth/basic/entities/basic.entity';
 import { ErrorCode } from '@/common/constants';
 
@@ -36,8 +32,10 @@ export class ProfileService {
         'age',
         'timeEat',
         'dateOfBirth',
-        'width',
+        'weight',
         'height',
+        'firstName',
+        'lastName',
       ],
     });
 
@@ -64,8 +62,10 @@ export class ProfileService {
         'age',
         'timeEat',
         'dateOfBirth',
-        'width',
+        'weight',
         'height',
+        'firstName',
+        'lastName',
       ],
     });
     return userUpdate;

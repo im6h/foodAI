@@ -24,4 +24,10 @@ export class UpdateProfileForm {
 
   @ApiProperty({ required: false })
   dateOfBirth?: Date;
+
+  @ApiProperty({ required: false })
+  firstName?: string;
+
+  @ApiProperty({ required: false })
+  lastName?: string;
 }

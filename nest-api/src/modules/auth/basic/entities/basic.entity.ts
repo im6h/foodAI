@@ -18,6 +18,12 @@ export class UserBasicEntity {
   @Column({ type: 'varchar' })
   username?: string = '';
 
+  @Column({ nullable: true })
+  firstName?: string;
+
+  @Column({ nullable: true })
+  lastName?: string;
+
   @Column({ type: 'varchar' })
   email?: string = '';
 
@@ -46,7 +52,7 @@ export class UserBasicEntity {
   dateOfBirth?: Date;
 
   @Column({ nullable: true })
-  width?: string;
+  weight?: string;
 
   @Column({ nullable: true })
   height?: string;

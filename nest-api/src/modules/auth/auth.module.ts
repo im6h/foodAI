@@ -17,7 +17,6 @@ import { UsersService } from '../users/services/users.service';
 import { UsersModule } from '../users/users.module';
 import { ReCapChaModule } from '@/components/recaptcha/recaptcha.module';
 import { RoleEntity } from '../roles/entities/role.entity';
-import { UserRegisterEntity } from '../auth/register/register.entity';
 
 const jwtModuleRegister = JwtModule.register({
   secret: jwtConstants.secret,
@@ -33,7 +32,6 @@ const jwtModuleRegister = JwtModule.register({
       UserBasicEntity,
       RoleEntity,
       UserBasicEntity,
-      UserRegisterEntity,
     ]),
     PassportModule.register({
       defaultStrategy: 'jwt',

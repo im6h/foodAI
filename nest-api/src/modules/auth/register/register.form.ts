@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { IsNotEmpty, IsEmail, IsOptional, IsISO8601 } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 // tslint:disable: max-classes-per-file
@@ -16,6 +16,24 @@ export class RegisterForm {
   @ApiProperty({ example: '123456' })
   @IsNotEmpty()
   password: string;
+
+  @ApiProperty({ required: false })
+  age?: number;
+
+  @ApiProperty({ required: false })
+  timeEat?: string;
+
+  @ApiProperty({ required: false })
+  dateOfBirth?: Date;
+
+  @ApiProperty({ required: false })
+  firstName?: string;
+
+  @ApiProperty({ required: false })
+  lastName?: string;
+
+  @ApiProperty({ required: false })
+  avatar?: string;
 }
 
 export class ActiveForm {

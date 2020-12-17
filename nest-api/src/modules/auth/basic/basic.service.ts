@@ -17,17 +17,10 @@ import { UserBasicEntity } from './entities/basic.entity';
 import { ChangePasswordForm } from './forms/change-password.form';
 import { UsersService } from '@/modules/users/services';
 import { MailerService } from '@nest-modules/mailer';
-import { TokenEntity } from './entities/token.entity';
-import {
-  STATUS_IN_ACTIVE,
-  STATUS_DECLINE,
-  STATUS_PENDING,
-} from '@/modules/users/constants';
 import { ErrorCode } from '@/common/constants';
 import { Config } from '@/config';
 import { makeRandomNumber } from '@/utils/string';
-import { activeMailHtml } from '@/utils/activeMailHtml';
-import {validateEmail, validateUsername} from '@/utils/validate';
+import { validateEmail, validateUsername } from '@/utils/validate';
 
 @Injectable()
 export class BasicService {

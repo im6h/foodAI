@@ -1,42 +1,27 @@
+ARG NODE_VERSION=current-alpine
+FROM node:${NODE_VERSION}
+RUN echo "**** install Python ****" && \
+    apk add --no-cache python3 && \
+    if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
+    \
+    echo "**** install pip ****" && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools wheel && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
 
-#FROM node:11
-FROM node:12.13.1-alpine
+RUN apk --no-cache add cmake clang clang-dev make gcc g++ libc-dev linux-headers
 
-ENV NODE_ENV=development
-RUN apk --no-cache add --virtual builds-deps build-base python
-RUN set -xe \
-    && apk add --no-cache --purge -uU \
-        curl icu-libs unzip zlib-dev musl \
-        mesa-gl mesa-dri-swrast \
-        libreoffice libreoffice-base libreoffice-lang-uk \
-        ttf-freefont ttf-opensans ttf-ubuntu-font-family ttf-inconsolata \
-    ttf-liberation ttf-dejavu \
-        libstdc++ dbus-x11 \
-    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
-    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk add --no-cache -U \
-    ttf-font-awesome ttf-mononoki ttf-hack \
-    && rm -rf /var/cache/apk/* /tmp/*
-RUN npm config set python /usr/bin/python
+RUN yarn global add node-gyp
 
-RUN yarn global add typescript
+WORKDIR /usr/src/app
+ARG APP_VERSION=dev
+ARG APP_COMMITID=HEAD
 
-WORKDIR /root/app
-
-COPY package.json .
-COPY yarn.lock .
-
+COPY ./package.json /usr/src/app
+COPY ./yarn.lock /usr/src/app
 RUN yarn
-RUN yarn global add pm2 
-
-COPY  . .
-
+COPY . .
 RUN yarn build
-RUN yarn seed ; exit 0
 
-ENV PM2_PUBLIC_KEY mrmu58cex4p9mzo
-ENV PM2_SECRET_KEY 6i58ob4g7lkq9vi
-
-# CMD yarn start:prod
-CMD [ "pm2-runtime", "dist/main.js" ]
+CMD [ "node", "dist/main.js" ]
