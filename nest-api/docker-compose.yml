@@ -1,0 +1,48 @@
+version: '3'
+
+networks:
+  my_network:
+    driver: bridge
+
+services:
+  database:
+    image: mysql:5.7
+    networks:
+      - my_network
+    restart: always
+    environment:
+      - MYSQL_DATABASE=apikit_db
+      - MYSQL_USER=apikit_user
+      - MYSQL_PASSWORD=apikit_password
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+    volumes:
+      - ./data/db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
+
+  redis:
+    image: redis
+    networks:
+      - my_network
+    ports:
+      - 3309:6379
+  app:
+    image: im6h/nestapi:0.2
+    expose:
+      - 4000
+    environment:
+      - DATABASE_URL=mysql://apikit_user:apikit_password@database:3306/apikit_db
+      - DATABASE_NAME=apikit_db
+      - PORT=4000
+      - LOG_FILE=./logs/errors.log
+      - REDIS_URL=redis://redis:6379
+      - REDIS_PREFIX='app_'
+    ports:
+      - 4080:4000
+    depends_on:
+      - database
+      - redis
+    links:
+      - database
+      - redis
