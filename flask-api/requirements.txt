@@ -1,7 +1,8 @@
 flask_swagger_ui==3.36.0
-flask_marshmallow==0.14.0
-xlrd==1.2.0
 Flask==1.1.2
-Flask_SQLAlchemy==2.4.4
-numpy==1.19.4
+flask_marshmallow==0.14.0
 Flask_Cors==3.0.9
+numpy==1.19.4
+xlrd==1.2.0
+opencv_python==4.4.0.46
+Flask_SQLAlchemy==2.4.4

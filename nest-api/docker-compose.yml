@@ -1,8 +1,15 @@
 version: '3'
 
+networks:
+  my_network:
+    driver: bridge
+
 services:
   database:
     image: mysql:5.7
+    networks:
+      - my_network
+    restart: always
     environment:
       - MYSQL_DATABASE=apikit_db
       - MYSQL_USER=apikit_user
@@ -16,8 +23,10 @@ services:
 
   redis:
     image: redis
+    networks:
+      - my_network
     ports:
-      - 7479:6379
+      - 3309:6379
   app:
     image: im6h/nestapi:0.2
     expose:
@@ -32,5 +41,8 @@ services:
     ports:
       - 4080:4000
     depends_on:
+      - database
+      - redis
+    links:
       - database
       - redis

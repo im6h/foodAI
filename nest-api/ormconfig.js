@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const { join } = require('path');
-console.log('join');
 module.exports = {
   type: 'mysql',
   url: process.env.DATABASE_URL,
@@ -12,4 +11,4 @@ module.exports = {
   logging: !process.env.NODE_ENV || process.env.NODE_ENV === 'local',
   seeds: ['src/**/*.seed.ts'],
   factories: ['src/**/*.factory.ts'],
-}
+};
