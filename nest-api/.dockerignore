@@ -1,6 +1,9 @@
 # Logs
 logs
 *.log
+.env
+node_modules
+dist
 
 # Runtime data
 pids
